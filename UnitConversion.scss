@@ -97,7 +97,7 @@
     @function parseFloat($val) { @return number($val);} // Really a math thing
     @function parseInt($val) { @return int($val); }   // Really a math thing
     
-    // Absolute lengths
+    // Absolute lengths - Thanks Scott Kellum  
     @function px($val){ @return unit-handler($val,0px); }
     @function pt($val){ @return unit-handler($val,0pt); }
     @function pc($val){ @return unit-handler($val,0pc); }
