@@ -113,10 +113,10 @@
         @for $i from 2 through length($args){ $em:$em / number(em(nth($args,$i))) }
         @return $em;
     }
-  @function pct($val,$base:1){ @return if(isNaN($val), null, percentage(number(px($val))/number(px($base)))); }
+    @function pct($val,$base:1){ @return if(isNaN($val), null, percentage(number(px($val))/number(px($base)))); }
 
 
-    // 
+    // Length unit handler
     @function unit-handler($val,$unit){
         @if($val==null or type-of($val)!=number){ @return null; }
         $u:unit($val);
