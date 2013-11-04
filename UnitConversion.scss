@@ -140,7 +140,7 @@
     @function turn($val){ @return if(isNaN($val),null,if(unitless($val),$val * 1turn,number(deg($val)) * 0.002777778turn)); } 
     @function rad($val) { @return if(isNaN($val),null,if(unitless($val),$val * 1rad ,number(deg($val)) * 0.017453293rad)); }
   
-    
+    // Convert using unit parameter
     @function convert($unit,$args...){
         @if($unit==number){ @return number($args...); }
         @if($unit==num) { @return num($args...); }
