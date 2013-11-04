@@ -97,7 +97,8 @@
     @function parseFloat($val) { @return number($val);} // Really a math thing
     @function parseInt($val) { @return int($val); }   // Really a math thing
     
-    // Absolute lengths - Thanks Scott Kellum  
+    // Absolute lengths 
+    // - Thanks Scott Kellum  
     @function px($val){ @return unit-handler($val,0px); }
     @function pt($val){ @return unit-handler($val,0pt); }
     @function pc($val){ @return unit-handler($val,0pc); }
@@ -126,6 +127,7 @@
 
     
     // Angle conversion using deg as base
+    // - Inspired by Chris Eppstein
     @function deg($val){
         @if(isNaN($val)){@return null;}
         $u:unit($val);
