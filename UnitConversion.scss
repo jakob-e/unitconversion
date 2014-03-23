@@ -109,8 +109,10 @@
     @function rem($val) { @return 0rem + if(unitless($val), $val, number(px($val)) * 0.0625 * 100% / $base-font-scale); }
     @function em($args...){ 
         $val:nth($args,1);
-        $em:0em  + if(unitless($val), $val, number(px($val)) * 0.0625 * 100% / $base-font-scale); 
-        @for $i from 2 through length($args){ $em:$em / number(em(nth($args,$i))) }
+        $em:0em  + if(unitless($val), $val, number(px($val)) * 0.0625 * 100% / $base-font-scale);
+        @if(length($args)>1){
+            @for $i from 2 through length($args){ $em:$em / number(em(nth($args,$i))) }
+        }
         @return $em;
     }
     @function pct($val,$base:1){ @return if(isNaN($val), null, percentage(number(px($val))/number(px($base)))); }
