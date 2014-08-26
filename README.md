@@ -6,7 +6,6 @@ Convert between units
 - deg, grad, turn, rad
 - pct
 
-```` SCSS
 
     // ========================================================== 
     // Unit Conversion
@@ -97,7 +96,6 @@ Convert between units
     //      1deg =  0.017453293rad   (180/π) 
     // 
     // ==========================================================
-````
 
 
 Please comment :)
