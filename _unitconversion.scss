@@ -216,14 +216,11 @@ $cast-string-to-unit: false !default;
 }           
  
 
-// Math pow
+// Math pow - why is this not native???
 @function pow($input, $pow) {
-	$ret: 1;
-	@if $pow > 0 { 
-		@for $i from 1 through $pow {  $ret: $ret * $input;  }
-	} @else {  
-		@for $i from $pow to 0 {  $ret: $ret / $input; } 
-	}
-	@return $ret;
+  $ret: 1;
+  @if $pow > 0 { @for $i from 1 through $pow {  $ret: $ret * $input;  } } 
+  @else { @for $i from $pow to 0 {  $ret: $ret / $input; } }
+  @return $ret;
 }
       
