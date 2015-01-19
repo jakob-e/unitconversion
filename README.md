@@ -1,7 +1,7 @@
 _unitconversion.scss
 ==============
 
-**CONVERT ANYTHING** (ALMOST)
+**Convert Anything** (almost)
 
 At the moment the following units are supported (to the best extend possible – please comment):
 
@@ -11,7 +11,7 @@ deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number
 ````
 
 
-**SIMPLE SYNTAX**
+**Simple Syntax**
 
 Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this function set is based on toUnit(fromUnit) making it a lot shorter and less cumbersome to maintain – as shown below :-)
 
@@ -25,7 +25,7 @@ Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this f
        rem-to-px(input);                     
        num-to-px(input);  
 `````
-**NOTE!**
+**Note!**
 
 * To allow conversion between relative and absolute lengths em and rem are calculated as pixel values based on base-font-size (16px browser default). If you change the base font size of your document – remember to set the $base-font-size variable accordingly.
 
