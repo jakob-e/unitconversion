@@ -1,7 +1,7 @@
 _unitconversion.scss
 ==============
 
-CONVERT ANYTHING (ALMOST)
+**CONVERT ANYTHING (ALMOST)**
 At the moment the following units are supported (to the best extend possible – please comment):
 
 ````SCSS
@@ -10,8 +10,21 @@ deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number
 ````
 
 
-SIMPLE SYNTAX
+**SIMPLE SYNTAX**
 Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this function set is based on toUnit(fromUnit) making it a lot shorter and less cumbersome to maintain – as shown below :-)
+
+````SCSS
+       pt-to-px(input);
+       pc-to-px(input);       
+       in-to-px(input);       
+       mm-to-px(input);    ==>   px(input);   
+       cm-to-px(input);              
+       em-to-px(input);              
+       rem-to-px(input);                     
+       num-to-px(input);  
+       
+`````
+
 ````SCSS
 // ____________________________________________________________________________
 //
