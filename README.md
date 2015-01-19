@@ -1,11 +1,15 @@
-UnitConversion
+_unitconversion.scss
 ==============
 
-Convert between units 
-- px, pt, pc, in, mm, cm, em, rem, number, int, uint
-- deg, grad, turn, rad
-- pct
+CONVERT ANYTHING (ALMOST)
+At the moment the following units are supported (to the best extend possible – please comment):
 
+px, pt, pc, in, mm, cm, em, rem, ex, ch, vw, vh, vmin, vmax, deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number
+
+
+
+SIMPLE SYNTAX
+Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this function set is based on toUnit(fromUnit) making it a lot shorter and less cumbersome to maintain – as shown below :-)
 ````SCSS
     // ========================================================== 
     // Unit Conversion
