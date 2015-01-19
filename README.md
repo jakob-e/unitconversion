@@ -57,43 +57,43 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 <table>
 <tr><th colspan="3">Conversion table</th></tr>
 <tr><td>Type</td><td>Function</td><td>Input units</td></tr>
-<tr><td>Absolute length</td><td>px(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>pt(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>pc(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>in(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>mm(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>cm(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>Absolute length</td><td>px($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>pt($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>pc($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>in($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>mm($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>cm($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
 
-<tr><td>Relative length</td><td>em(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>rem(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
-<tr><td>               </td><td>ex(input);</td><td>ex, number                              </td></tr>
-<tr><td>               </td><td>ch(input);</td><td>ch, number                              </td></tr>
-<tr><td>               </td><td>vw(input);</td><td>vw, number                              </td></tr>
-<tr><td>               </td><td>vh(input);</td><td>vh, number                              </td></tr>
-<tr><td>               </td><td>vmin(input);</td><td>vmin, number                          </td></tr>
-<tr><td>               </td><td>vmax(input);</td><td>vmax, number                          </td></tr>
+<tr><td>Relative length</td><td>em($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>rem($input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>ex($input);</td><td>ex, number                              </td></tr>
+<tr><td>               </td><td>ch($input);</td><td>ch, number                              </td></tr>
+<tr><td>               </td><td>vw($input);</td><td>vw, number                              </td></tr>
+<tr><td>               </td><td>vh($input);</td><td>vh, number                              </td></tr>
+<tr><td>               </td><td>vmin($input);</td><td>vmin, number                          </td></tr>
+<tr><td>               </td><td>vmax($input);</td><td>vmax, number                          </td></tr>
 
-<tr><td>Angle          </td><td>deg(input);</td><td>deg, rad, grad, turn, number           </td></tr>
-<tr><td>               </td><td>rad(input);</td><td>deg, rad, grad, turn, number           </td></tr>
-<tr><td>               </td><td>grad(input);</td><td>deg, rad, grad, turn, number          </td></tr>
-<tr><td>               </td><td>turn(input);</td><td>deg, rad, grad, turn, number          </td></tr>
+<tr><td>Angle          </td><td>deg($input);</td><td>deg, rad, grad, turn, number           </td></tr>
+<tr><td>               </td><td>rad($input);</td><td>deg, rad, grad, turn, number           </td></tr>
+<tr><td>               </td><td>grad($input);</td><td>deg, rad, grad, turn, number          </td></tr>
+<tr><td>               </td><td>turn($input);</td><td>deg, rad, grad, turn, number          </td></tr>
 
-<tr><td>Resolution     </td><td>dpi(input);</td><td>dpi, dpcm, dppx, number                </td></tr>
-<tr><td>               </td><td>dpcm(input);</td><td>dpi, dpcm, dppx, number               </td></tr>
-<tr><td>               </td><td>dppx(input);</td><td>dpi, dpcm, dppx, number               </td></tr>
+<tr><td>Resolution     </td><td>dpi($input);</td><td>dpi, dpcm, dppx, number                </td></tr>
+<tr><td>               </td><td>dpcm($input);</td><td>dpi, dpcm, dppx, number               </td></tr>
+<tr><td>               </td><td>dppx($input);</td><td>dpi, dpcm, dppx, number               </td></tr>
 
-<tr><td>Time           </td><td>ms(input);</td><td>ms, s, number                           </td></tr>
-<tr><td>               </td><td>s(input);</td><td> ms, s, number                            </td></tr>
+<tr><td>Time           </td><td>ms($input);</td><td>ms, s, number                           </td></tr>
+<tr><td>               </td><td>s($input);</td><td> ms, s, number                            </td></tr>
 
-<tr><td>Frequency      </td><td>hz(input);</td><td>Hz, kHz, number                         </td></tr>
-<tr><td>               </td><td>khz(input);</td><td>Hz, kHz, number                        </td></tr>
+<tr><td>Frequency      </td><td>hz($input);</td><td>Hz, kHz, number                         </td></tr>
+<tr><td>               </td><td>khz($input);</td><td>Hz, kHz, number                        </td></tr>
 
 
-<tr><td>String        </td><td>str(input);</td><td>Anything not null                       </td></tr>
-<tr><td>Number        </td><td>num(input);</td>
+<tr><td>String        </td><td>str($input);<br>string($input);</td><td>Anything not null                       </td></tr>
+<tr><td>Number        </td><td>num(input);<br>number($input)</td>
 <td>px, pt, pc, in, mm, cm, em, rem, ex, ch,<br>vw, vh, vmin, vmax, deg, rad, grad, turn,<br>dpi, dpcm, dppx, s, ms, hz, khz, number</td></tr>
-<tr><td>              </td><td>int(input);</td><td align="center">″</td></tr>
-<tr><td>              </td><td>uint(input);</td><td align="center">″</td></tr>
+<tr><td>              </td><td>int($input);</td><td align="center">″</td></tr>
+<tr><td>              </td><td>uint($input);</td><td align="center">″</td></tr>
 </table>
 
 
