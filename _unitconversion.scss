@@ -215,4 +215,15 @@ $cast-string-to-unit: false !default;
   @return convert(if($unit == '', num, $unit), $number);
 }           
  
- 
+
+// Math pow
+@function pow($input, $pow) {
+	$ret: 1;
+	@if $pow > 0 { 
+		@for $i from 1 through $pow {  $ret: $ret * $input;  }
+	} @else {  
+		@for $i from $pow to 0 {  $ret: $ret / $input; } 
+	}
+	@return $ret;
+}
+      
