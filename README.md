@@ -83,24 +83,14 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 <tr><td>               </td><td>dppx(input);</td><td>dpi, dpcm, dppx, number               </td></tr>
 
 <tr><td>Time           </td><td>ms(input);</td><td>ms, s, number                           </td></tr>
-<tr><td>               </td><td>s(input);</td><td>ms, s, number                            </td></tr>
-<tr><td>               </td><td>dppx(input);</td><td>dpi, dpcm, dppx, number               </td></tr>
+<tr><td>               </td><td>s(input);</td><td> ms, s, number                            </td></tr>
 
+<tr><td>Frequency      </td><td>hz(input);</td><td>Hz, kHz, number                         </td></tr>
+<tr><td>               </td><td>khz(input);</td><td>Hz, kHz, number                        </td></tr>
 
 </table>
 
-//   Resolution
-//   dpi(input);            dpi, dpcm, dppx, number
-//   dpcm(input);           dpi, dpcm, dppx, number
-//   dppx(input);           dpi, dpcm, dppx, number
-//
-//   Time
-//   s(input);              s, ms, number
-//   ms(input);             s, ms, number
-//
-//   Frequency
-//   hz(input);             hz, khz, number
-//   khz(input);            hz, khz, number
+
 //  
 //   String
 //   str(input);            anything not null
