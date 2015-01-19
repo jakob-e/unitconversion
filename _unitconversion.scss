@@ -1,6 +1,63 @@
 // ___________________________________________________________________
 //
-//  Unit Conversion 
+//      Unit Conversion 
+// ___________________________________________________________________
+//
+//     Absolute length            
+//     px(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//     pt(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//     pc(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//     in(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//     mm(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//     cm(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//
+//     Relative length - font based
+//     em(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//     rem(input);   // px, pt, pc, in, mm, cm, em, rem, number
+//     ex(input);    // ex, number  
+//     ch(input);    // ch, number
+//
+//     Relative length - viewport based
+//     vw(input);    // vw, number
+//     vh(input);    // vh, number
+//     vmin(input);  // vmin, number  
+//     vmax(input);  // vmax, number
+//
+//     Angle
+//     deg(input);   // deg, rad, grad, turn, number
+//     rad(input);   // deg, rad, grad, turn, number
+//     grad(input);  // deg, rad, grad, turn, number
+//     turn(input);  // deg, rad, grad, turn, number
+//
+//     Resolution
+//     dpi(input);   // dpi, dpcm, dppx, number
+//     dpcm(input);  // dpi, dpcm, dppx, number
+//     dppx(input);  // dpi, dpcm, dppx, number
+//
+//     Time
+//     s(input);     // s, ms, number
+//     ms(input);    // s, ms, number
+//
+//     Frequency
+//     hz(input);    // hz, khz, number
+//     khz(input);   // hz, khz, number
+//
+//     String
+//     str(input);   // anything not null
+//
+//     Number, int and uint
+//     num(input);   // px, pt, pc, in, mm, cm, em, rem, ex, ch,
+//                   // vw, vh, vmin, vmax, deg, rad, grad, turn,
+//                   // dpi, dpcm, dppx, s, ms, hz, khz, number
+//     int(input);   // as number
+//     uint(input);  // as number
+//
+//     Aliases
+//     string(input);
+//     number(input);
+//     parse-float(input);
+//     parse-int(input);
+//
 // ___________________________________________________________________
 
 $base-font-size: 16px !default;	 
