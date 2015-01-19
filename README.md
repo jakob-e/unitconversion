@@ -1,7 +1,7 @@
 _unitconversion.scss
 ==============
 
-**CONVERT ANYTHING (ALMOST)**
+**CONVERT ANYTHING** (ALMOST)
 
 At the moment the following units are supported (to the best extend possible – please comment):
 
