@@ -1,67 +1,69 @@
-// ___________________________________________________________________
+// ____________________________________________________________________________
 //
-//      Unit Conversion 
-// ___________________________________________________________________
+//    Unit Conversion v.2.0
+// ____________________________________________________________________________
 //
-//     Absolute length            
-//     px(input);    // px, pt, pc, in, mm, cm, em, rem, number
-//     pt(input);    // px, pt, pc, in, mm, cm, em, rem, number
-//     pc(input);    // px, pt, pc, in, mm, cm, em, rem, number
-//     in(input);    // px, pt, pc, in, mm, cm, em, rem, number
-//     mm(input);    // px, pt, pc, in, mm, cm, em, rem, number
-//     cm(input);    // px, pt, pc, in, mm, cm, em, rem, number
+//   Function               Input units    
+//     
+//   Absolute length      
+//   px(input);             px, pt, pc, in, mm, cm, em, rem, number
+//   pt(input);             px, pt, pc, in, mm, cm, em, rem, number
+//   pc(input);             px, pt, pc, in, mm, cm, em, rem, number
+//   in(input);             px, pt, pc, in, mm, cm, em, rem, number
+//   mm(input);             px, pt, pc, in, mm, cm, em, rem, number
+//   cm(input);             px, pt, pc, in, mm, cm, em, rem, number
 //
-//     Relative length - font based
-//     em(input);    // px, pt, pc, in, mm, cm, em, rem, number
-//     rem(input);   // px, pt, pc, in, mm, cm, em, rem, number
-//     ex(input);    // ex, number  
-//     ch(input);    // ch, number
+//   Relative length 
+//   em(input);             px, pt, pc, in, mm, cm, em, rem, number
+//   rem(input);            px, pt, pc, in, mm, cm, em, rem, number
+//   ex(input);             ex, number  
+//   ch(input);             ch, number
+//   vw(input);             vw, number
+//   vh(input);             vh, number
+//   vmin(input);           vmin, number  
+//   vmax(input);           vmax, number
 //
-//     Relative length - viewport based
-//     vw(input);    // vw, number
-//     vh(input);    // vh, number
-//     vmin(input);  // vmin, number  
-//     vmax(input);  // vmax, number
+//   Angle
+//   deg(input);            deg, rad, grad, turn, number
+//   rad(input);            deg, rad, grad, turn, number
+//   grad(input);           deg, rad, grad, turn, number
+//   turn(input);           deg, rad, grad, turn, number
 //
-//     Angle
-//     deg(input);   // deg, rad, grad, turn, number
-//     rad(input);   // deg, rad, grad, turn, number
-//     grad(input);  // deg, rad, grad, turn, number
-//     turn(input);  // deg, rad, grad, turn, number
+//   Resolution
+//   dpi(input);            dpi, dpcm, dppx, number
+//   dpcm(input);           dpi, dpcm, dppx, number
+//   dppx(input);           dpi, dpcm, dppx, number
 //
-//     Resolution
-//     dpi(input);   // dpi, dpcm, dppx, number
-//     dpcm(input);  // dpi, dpcm, dppx, number
-//     dppx(input);  // dpi, dpcm, dppx, number
+//   Time
+//   s(input);              s, ms, number
+//   ms(input);             s, ms, number
 //
-//     Time
-//     s(input);     // s, ms, number
-//     ms(input);    // s, ms, number
+//   Frequency
+//   hz(input);             hz, khz, number
+//   khz(input);            hz, khz, number
+//  
+//   String
+//   str(input);            anything not null
 //
-//     Frequency
-//     hz(input);    // hz, khz, number
-//     khz(input);   // hz, khz, number
+//   Number, int and uint
+//   num(input);            px, pt, pc, in, mm, cm, em, rem, ex, ch,
+//                          vw, vh, vmin, vmax, deg, rad, grad, turn,
+//                          dpi, dpcm, dppx, s, ms, hz, khz, number
+//   int(input);            as number
+//   uint(input);           as number
 //
-//     String
-//     str(input);   // anything not null
+//   Aliases
+//   string(input);
+//   number(input);
 //
-//     Number, int and uint
-//     num(input);   // px, pt, pc, in, mm, cm, em, rem, ex, ch,
-//                   // vw, vh, vmin, vmax, deg, rad, grad, turn,
-//                   // dpi, dpcm, dppx, s, ms, hz, khz, number
-//     int(input);   // as number
-//     uint(input);  // as number
-//
-//     Aliases
-//     string(input);
-//     number(input);
-//     parse-float(input);
-//     parse-int(input);
-//
-// ___________________________________________________________________
+// ____________________________________________________________________________
 
+// Base font size in pixel for converting em and tem to absolute lengths.
 $base-font-size: 16px !default;	 
 
+// Allow string to be cast as unit (experimental – handle with care)
+$cast-string-to-unit: false !default;
+    
 // Absolute lengths
 @function px($input){ @return convert(px, $input); }
 @function pt($input){ @return convert(pt, $input); }
@@ -91,12 +93,14 @@ $base-font-size: 16px !default;
 
 // Relative lengths
 @function em($input...){
-    $em: convert(em, nth($input,1));
-    // Adjust for compounds (visual size)
-    @if length($input) > 1 { 
-        @for $i from 2 through length($input){ $em: $em / num(em(nth($input,$i))); } 
-    }
-    @return $em;
+  $em: convert(em, nth($input,1));
+  // Adjust for compounds (visual size)
+  @if length($input) > 1 { 
+    @for $i from 2 through length($input){ 
+      $em: $em / num(em(nth($input,$i))); 
+    } 
+  }
+  @return $em;
 }
 @function rem($input){ @return convert(rem, num(em($input))); }
 
@@ -128,50 +132,87 @@ $base-font-size: 16px !default;
 
 // Conversion function
 @function convert($unit, $input){
-    // Maybe add convert from string - dodgy fella ;)
-    // Test against valid CSS units
-    $convert-unit: map-get((
-        px: 0px, pt: 0pt, pc: 0pc, in: 0in, mm: 0mm, cm: 0cm,   // absolute length
-        em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                   // relative length - font based
-        vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,             // relative length - viewport based
-        deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,         // angle
-        s: 0s, ms: 0ms,                                         // time
-        hz: 0Hz, khz: 0kHz,                                     // frequencie
-        dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                    // resolution
-        pct: 0%, percent: 0%, num: 0, number: 0                 // percent or number  
-    ), $unit);
-    
-    // Error handling – wrong $unit 
-    // Incomparable units are caught in convertion 
-    @if not $convert-unit {
-        @error 'Could not convert to `#{$unit}` – must be a valid CSS unit';
-        @return null; 
-    }  
+  @if type-of($input) == string and $cast-string-to-unit {
+    $input: cast-to-unit($input);        
+  } 
+  // Test against valid CSS units
+  $convert-unit: map-get((
+    px: 0px, pt: 0pt, pc: 0pc, in: 0in, mm: 0mm, cm: 0cm, // absolute length
+    em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
+    vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
+    deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,       // angle
+    s: 0s, ms: 0ms,                                       // time
+    hz: 0Hz, khz: 0kHz,                                   // frequency
+    dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                  // resolution
+    pct: 0%, percent: 0%, num: 0, number: 0               // percent or number  
+  ), $unit);
+  
+  // Error handling – wrong $unit 
+  // Incomparable units are caught in convertion 
+  @if not $convert-unit {
+    @error 'Could not convert to `#{$unit}` – must be a valid CSS unit';
+    @return null; 
+  }  
 
-    // Number/incomparable conversion
-    @if index(num number ex ch vw vh vmin vmax, $unit) {
-        $value: num($input);
-    }
-    
-    // EM/REM convertion using px as base
-    @if index(em rem, unit($input)) {
-        $input: 0px + num($input) * $base-font-size/1px; 
-    } 
-    @if index(em rem, $unit) and not unitless($input) {
-        $input: 0px + $input;                              
-        $input: num($input) * 1px/$base-font-size; 
-    } 
-    
-    // Convert 
-    @return $convert-unit + $input;
+  // Number/incomparable conversion
+  @if index(num number ex ch vw vh vmin vmax, $unit) {
+    $value: num($input);
+  }
+  
+  // EM/REM convertion using px as base
+  @if index(em rem, unit($input)) {
+    $input: 0px + num($input) * $base-font-size/1px; 
+  } 
+  @if index(em rem, $unit) and not unitless($input) {
+    $input: 0px + $input;                
+    $input: num($input) * 1px/$base-font-size; 
+  } 
+  
+  // Convert 
+  @return $convert-unit + $input;
 }
+         
 
-
+           
 // Aliases
 @function string($input){ @return str($input);}
 @function number($input){ @return num($input);}
-@function parse-float($input){ @return num($input);}
-@function parse-int($input){ @return int($input);}
+     
+           
 
-
-
+           
+// Cast to unit            
+@function cast-to-unit($input){
+  // Validate input type (note! no unit validation) 
+  @if not index('string' 'number',type-of($input)) { // wrong type   
+    @error 'Unable to cast `#{type-of($input)}`.';   // throw warning  
+    @return null;
+  }
+  @if type-of($input) == number { @return $input; }  // no need to cast
+  
+  // Cast string to unit
+  $number-chars: '0' '1' '2' '3' '4' '5' '6' '8' '9';
+  $number:  0;     // return value
+  $devider: 0;     // devider used to set decimals  
+  $decimal: false; // flag to mark decimal place  
+  $unit   : '';    // unit
+  @for $i from 1 through str-length($input) {        // loop through string
+    $char:str-slice($input, $i, $i);                 // current charcater
+    $index:index($number-chars , $char);             // is character a number
+    $decimal:if($char=='.', true,  $decimal);        // mark first decimal
+    @if $index {                                     // if character is a number  
+      $devider:if($decimal ,$devider + 1, $devider); // increment devider if we have a decimal flag
+      $number: $number * 10 + $index - 1;            // add number part ($index - 1 is the new part)
+    }
+    @else if(not index(' ' '-' '+' '.', $char)){     // if character is not a number, ' ',-, + or .
+      $unit:$unit + $char;                           // add character to unit
+    } 
+  }
+  // Format value  
+  $number:if(str-index($input, '-'), $number * -1, $number);// negative value
+  $number:$number / pow(10, $devider);                      // add decimals   
+  
+  @return convert(if($unit == '', num, $unit), $number);
+}           
+ 
+ 
