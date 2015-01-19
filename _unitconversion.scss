@@ -1,67 +1,76 @@
 // ___________________________________________________________________
 //
-//  Unit Conversion
+//  Unit Conversion 
 // ___________________________________________________________________
 
-$base-font-size: 16px !default;	
-
-// Strings and numbers
-@function str($input) { @return #{$input};  }		
-@function num($input) { @return $input/($input*0+1); }
+$base-font-size: 16px !default;	 
 
 // Absolute lengths
-@function px($input) { @return convert(px, $input); }
-@function pt($input) { @return convert(pt, $input); }
-@function pc($input) { @return convert(pc, $input); }
-@function in($input) { @return convert(in, $input); }
-@function mm($input) { @return convert(mm, $input); }
-@function cm($input) { @return convert(cm, $input); }
+@function px($input){ @return convert(px, $input); }
+@function pt($input){ @return convert(pt, $input); }
+@function pc($input){ @return convert(pc, $input); }
+@function in($input){ @return convert(in, $input); }
+@function mm($input){ @return convert(mm, $input); }
+@function cm($input){ @return convert(cm, $input); }
 
 // Angles
-@function deg($input) { @return convert(deg,  $input); }
-@function rad($input) { @return convert(rad,  $input); }
+@function deg($input){ @return convert(deg, $input); }
+@function rad($input){ @return convert(rad, $input); }
 @function grad($input){ @return convert(grad, $input); }
 @function turn($input){ @return convert(turn, $input); }
 
 // Resolution
-@function dpi($input) { @return convert(dpi,  $input); }
+@function dpi($input){ @return convert(dpi, $input); }
 @function dpcm($input){ @return convert(dpcm, $input); }
 @function dppx($input){ @return convert(dppx, $input); }
 
 // Time
 @function ms($input){ @return convert(ms, $input); }
-@function s($input) { @return convert(s,  $input); }
+@function s($input){ @return convert(s, $input); }
 
 // Frequencies
-@function hz($input) { @return convert(hz,  $input);}
+@function hz($input){ @return convert(hz, $input);}
 @function khz($input){ @return convert(khz, $input); }
 
 // Relative lengths
 @function em($input...){
     $em: convert(em, nth($input,1));
+    // Adjust for compounds (visual size)
     @if length($input) > 1 { 
-      @for $i from 2 through length($input){ $em: $em / num(em(nth($input,$i))); } 
+        @for $i from 2 through length($input){ $em: $em / num(em(nth($input,$i))); } 
     }
     @return $em;
 }
-@function rem($input){ 
-  $rem: convert(rem, num(em($input)));
-  @if function-exists(in-scope) and in-scope(ie8) { @return convert(px, $rem); }
-  @else { @return $rem; }
-}
+@function rem($input){ @return convert(rem, num(em($input))); }
 
 // Inconvertible relative lengths – depends on font 
-@function ex($input) { @return convert(ex, $input); }
-@function ch($input) { @return convert(ch, $input); }
+@function ex($input){ @return convert(ex, $input); }
+@function ch($input){ @return convert(ch, $input); }
 
-// Viewport - maybe add percentage conversion 
-@function vw($input)  { @return convert(vw, $input); }
-@function vh($input)  { @return convert(vh, $input); }
+// Viewport
+@function vw($input){ @return convert(vw, $input); }
+@function vh($input){ @return convert(vh, $input); }
 @function vmin($input){ @return convert(vmin, $input); }
 @function vmax($input){ @return convert(vmax, $input); }
 
+// Strings and numbers
+@function str($input){ @return #{$input};  }		
+@function num($input){
+  @if type-of($input) != number {
+    @error 'Could not convert `#{$input}` - must be `type-of number`';
+    @return null; 
+  }
+  @return $input/($input*0+1); 
+}
+@function int($input){ 
+  $num: num($input);
+  @return if($num<0, ceil($num), floor($num));
+}
+@function uint($input){ @return abs(int($input)); }
+
+
 // Conversion function
-@function convert($unit, $input) {
+@function convert($unit, $input){
     // Maybe add convert from string - dodgy fella ;)
     // Test against valid CSS units
     $convert-unit: map-get((
@@ -99,3 +108,13 @@ $base-font-size: 16px !default;
     // Convert 
     @return $convert-unit + $input;
 }
+
+
+// Aliases
+@function string($input){ @return str($input);}
+@function number($input){ @return num($input);}
+@function parse-float($input){ @return num($input);}
+@function parse-int($input){ @return int($input);}
+
+
+
