@@ -3,7 +3,7 @@ _unitconversion.scss
 
 **Convert Anything** (almost)
 
-At the moment the following units are supported (to the best extend possible – please comment):
+At the moment the following units are supported (please comment if something is wrong/missing):
 
 ````SCSS
 px, pt, pc, in, mm, cm, em, rem, ex, ch, vw, vh, vmin, vmax, 
