@@ -31,7 +31,21 @@ Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this f
 
 * To ease the job of handling compounds the em function takes multiple arguments. Each argument is treated as an em compound and used to calculate the visual size.
 Example – how to set a visual size of 18px on a class nested in an element with a font-size of 2em:
-
+````SCSS
+      .class {
+          font-size: em(18px, 2em);  ==>   0.5625em;
+      }
+`````
+* If you use unit conversion in relation to the font shorthand syntax be aware that line-height "/" will cause division. To prevent this from happening you can either either interpolate the value or use + to add the pieces together without calculation:
+````SCSS
+      h2 { 
+          font:300 em(24px)+/3 'Lato', sans-serif;
+      }
+      //  or
+      h2 { 
+          font:300 #{em(24px)}/3 'Lato', sans-serif;
+      }
+````
 ````SCSS
 // ____________________________________________________________________________
 //
