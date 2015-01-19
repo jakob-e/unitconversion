@@ -63,22 +63,34 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 <tr><td>               </td><td>in(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
 <tr><td>               </td><td>mm(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
 <tr><td>               </td><td>cm(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+
+<tr><td>Relative length</td><td>em(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>rem(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>ex(input);</td><td>ex, number                              </td></tr>
+<tr><td>               </td><td>ch(input);</td><td>ch, number                              </td></tr>
+<tr><td>               </td><td>vw(input);</td><td>vw, number                              </td></tr>
+<tr><td>               </td><td>vh(input);</td><td>vh, number                              </td></tr>
+<tr><td>               </td><td>vmin(input);</td><td>vmin, number                          </td></tr>
+<tr><td>               </td><td>vmax(input);</td><td>vmax, number                          </td></tr>
+
+<tr><td>Angle          </td><td>deg(input);</td><td>deg, rad, grad, turn, number           </td></tr>
+<tr><td>               </td><td>rad(input);</td><td>deg, rad, grad, turn, number           </td></tr>
+<tr><td>               </td><td>grad(input);</td><td>deg, rad, grad, turn, number          </td></tr>
+<tr><td>               </td><td>turn(input);</td><td>deg, rad, grad, turn, number          </td></tr>
+
 </table>
 
 
 
-| Type | Function | Import units |
-|:------------|:-----------|:-----------|
-|Absolute length|px(input);|px, pt, pc, in, mm, cm, em, rem, number|
-||pt(input);|px, pt, pc, in, mm, cm, em, rem, number|
-||pc(input);|px, pt, pc, in, mm, cm, em, rem, number|
-||in(input);|px, pt, pc, in, mm, cm, em, rem, number|
-||mm(input);|px, pt, pc, in, mm, cm, em, rem, number|
-||cm(input);|px, pt, pc, in, mm, cm, em, rem, number|
 
 
 
-
+//
+//   Angle
+//   deg(input);            deg, rad, grad, turn, number
+//   rad(input);            deg, rad, grad, turn, number
+//   grad(input);           deg, rad, grad, turn, number
+//   turn(input);           deg, rad, grad, turn, number
 
 ````SCSS
 // ____________________________________________________________________________
