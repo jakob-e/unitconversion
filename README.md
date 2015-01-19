@@ -99,5 +99,5 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 </table>
 
 
-
-
+Cive it a try on:
+[Sassmeister.com](http://sassmeister.com/gist/1171db8104c2abcee1a5 ) or [CodePen.io](http://codepen.io/jakob-e/pen/dPWOQy)
