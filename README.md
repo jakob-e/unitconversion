@@ -46,6 +46,14 @@ Example – how to set a visual size of 18px on a class nested in an element wit
           font:300 #{em(24px)}/3 'Lato', sans-serif;
       }
 ````
+* At the moment LibSass does not support native conversion of the following units: dpi, dpcm, dppx, s, ms, Hz and kHz . Also note that you must run the latest version (3.1 I think) supporting angles... but chances are you'll be 95% fine.
+* $cast-string-to-unit: true; allows you to cast a string to a unit. This feature is highly experimental and in the category of Chris-Eppstein-would-never-do-that. Does not work in LibSass – use at own risk!
+````SCSS
+      .class {
+        width: px("20em") + px(4);  ==>  324px;
+      }
+    
+````
 ````SCSS
 // ____________________________________________________________________________
 //
