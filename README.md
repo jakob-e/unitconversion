@@ -54,6 +54,32 @@ Example – how to set a visual size of 18px on a class nested in an element wit
       }
     
 ````
+<table>
+<tr><th colspan="3">Conversion table</th></tr>
+<tr><td>Type</td><td>Function</td><td>Input units</td></tr>
+<tr><td>Absolute length</td><td>px(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>pt(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>pc(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>in(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>mm(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+<tr><td>               </td><td>cm(input);</td><td>px, pt, pc, in, mm, cm, em, rem, number</td></tr>
+</table>
+
+
+
+| Type | Function | Import units |
+|:------------|:-----------|:-----------|
+|Absolute length|px(input);|px, pt, pc, in, mm, cm, em, rem, number|
+||pt(input);|px, pt, pc, in, mm, cm, em, rem, number|
+||pc(input);|px, pt, pc, in, mm, cm, em, rem, number|
+||in(input);|px, pt, pc, in, mm, cm, em, rem, number|
+||mm(input);|px, pt, pc, in, mm, cm, em, rem, number|
+||cm(input);|px, pt, pc, in, mm, cm, em, rem, number|
+
+
+
+
+
 ````SCSS
 // ____________________________________________________________________________
 //
