@@ -217,11 +217,11 @@ $cast-string-to-unit: false !default;
  
 
 // Math pow - why is this not native???
-@function pow($input, $pow) {
-  $ret: 1;
-  @if $pow > 0 { @for $i from 1 through $pow {  $ret: $ret * $input;  } } 
-  @else { @for $i from $pow to 0 {  $ret: $ret / $input; } }
-  @return $ret;
+@function pow($number, $exponent){
+  $result: 1;
+  $number: if($exponent < 0, 1/$number, $number);
+  @for $i from 0 to $exponent{ $result: $result * $number; } 
+  @return $result;
 }
 
 
