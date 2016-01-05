@@ -1,6 +1,6 @@
 // ____________________________________________________________________________
 //
-//    Unit Conversion v.2.0 
+//    Unit Conversion v.2.1
 // ____________________________________________________________________________
 //
 //   Function               Input units    
@@ -58,42 +58,40 @@
 //
 // ____________________________________________________________________________
 
-// Base font size in pixel for converting em and tem to absolute lengths.
+// Base font size in pixel for converting em and rem to absolute lengths.
 $base-font-size: 16px !default;	 
 
-// Allow string to be cast as unit (experimental – handle with care)
-$cast-string-to-unit: false !default;
     
 // Absolute lengths
-@function px($input){ @return convert(px, $input); }
-@function pt($input){ @return convert(pt, $input); }
-@function pc($input){ @return convert(pc, $input); }
-@function in($input){ @return convert(in, $input); }
-@function mm($input){ @return convert(mm, $input); }
-@function cm($input){ @return convert(cm, $input); }
+@function px($input){ @return to-unit(px, $input); }
+@function pt($input){ @return to-unit(pt, $input); }
+@function pc($input){ @return to-unit(pc, $input); }
+@function in($input){ @return to-unit(in, $input); }
+@function mm($input){ @return to-unit(mm, $input); }
+@function cm($input){ @return to-unit(cm, $input); }
 
 // Angles
-@function deg($input){ @return convert(deg, $input); }
-@function rad($input){ @return convert(rad, $input); }
-@function grad($input){ @return convert(grad, $input); }
-@function turn($input){ @return convert(turn, $input); }
+@function deg($input){ @return to-unit(deg, $input); }
+@function rad($input){ @return to-unit(rad, $input); }
+@function grad($input){ @return to-unit(grad, $input); }
+@function turn($input){ @return to-unit(turn, $input); }
 
 // Resolution
-@function dpi($input){ @return convert(dpi, $input); }
-@function dpcm($input){ @return convert(dpcm, $input); }
-@function dppx($input){ @return convert(dppx, $input); }
+@function dpi($input){ @return to-unit(dpi, $input); }
+@function dpcm($input){ @return to-unit(dpcm, $input); }
+@function dppx($input){ @return to-unit(dppx, $input); }
 
 // Time
-@function ms($input){ @return convert(ms, $input); }
-@function s($input){ @return convert(s, $input); }
+@function ms($input){ @return to-unit(ms, $input); }
+@function s($input){ @return to-unit(s, $input); }
 
 // Frequencies
-@function hz($input){ @return convert(hz, $input);}
-@function khz($input){ @return convert(khz, $input); }
+@function hz($input){ @return to-unit(hz, $input);}
+@function khz($input){ @return to-unit(khz, $input); }
 
 // Relative lengths
 @function em($input...){
-  $em: convert(em, nth($input,1));
+  $em: to-unit(em, nth($input,1));
   // Adjust for compounds (visual size)
   @if length($input) > 1 { 
     @for $i from 2 through length($input){ 
@@ -102,17 +100,17 @@ $cast-string-to-unit: false !default;
   }
   @return $em;
 }
-@function rem($input){ @return convert(rem, num(em($input))); }
+@function rem($input){ @return to-unit(rem, num(em($input))); }
 
 // Inconvertible relative lengths – depends on font 
-@function ex($input){ @return convert(ex, $input); }
-@function ch($input){ @return convert(ch, $input); }
+@function ex($input){ @return to-unit(ex, $input); }
+@function ch($input){ @return to-unit(ch, $input); }
 
 // Viewport
-@function vw($input){ @return convert(vw, $input); }
-@function vh($input){ @return convert(vh, $input); }
-@function vmin($input){ @return convert(vmin, $input); }
-@function vmax($input){ @return convert(vmax, $input); }
+@function vw($input){ @return to-unit(vw, $input); }
+@function vh($input){ @return to-unit(vh, $input); }
+@function vmin($input){ @return to-unit(vmin, $input); }
+@function vmax($input){ @return to-unit(vmax, $input); }
 
 // Strings and numbers
 @function str($input){ @return #{$input};  }		
@@ -129,14 +127,15 @@ $cast-string-to-unit: false !default;
 }
 @function uint($input){ @return abs(int($input)); }
 
+// Aliases
+@function string($input){ @return str($input);}
+@function number($input){ @return num($input);}
+
 
 // Conversion function
-@function convert($unit, $input){
-  @if type-of($input) == string and $cast-string-to-unit {
-    $input: cast-to-unit($input);        
-  } 
+@function to-unit($unit, $input){
   // Test against valid CSS units
-  $convert-unit: map-get((
+  $to-unit: map-get((
     px: 0px, pt: 0pt, pc: 0pc, in: 0in, mm: 0mm, cm: 0cm, // absolute length
     em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
     vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
@@ -149,7 +148,7 @@ $cast-string-to-unit: false !default;
   
   // Error handling – wrong $unit 
   // Incomparable units are caught in convertion 
-  @if not $convert-unit {
+  @if not $to-unit {
     @error 'Could not convert to `#{$unit}` – must be a valid CSS unit';
     @return null; 
   }  
@@ -169,61 +168,9 @@ $cast-string-to-unit: false !default;
   } 
   
   // Convert 
-  @return $convert-unit + $input;
+  @return $to-unit + $input;
 }
-         
-
-           
-// Aliases
-@function string($input){ @return str($input);}
-@function number($input){ @return num($input);}
-     
-           
-
-           
-// Cast to unit            
-@function cast-to-unit($input){
-  // Validate input type (note! no unit validation) 
-  @if not index('string' 'number',type-of($input)) { // wrong type   
-    @error 'Unable to cast `#{type-of($input)}`.';   // throw warning  
-    @return null;
-  }
-  @if type-of($input) == number { @return $input; }  // no need to cast
-  
-  // Cast string to unit
-  $number-chars: '0' '1' '2' '3' '4' '5' '6' '8' '9';
-  $number:  0;     // return value
-  $devider: 0;     // devider used to set decimals  
-  $decimal: false; // flag to mark decimal place  
-  $unit   : '';    // unit
-  @for $i from 1 through str-length($input) {        // loop through string
-    $char:str-slice($input, $i, $i);                 // current charcater
-    $index:index($number-chars , $char);             // is character a number
-    $decimal:if($char=='.', true,  $decimal);        // mark first decimal
-    @if $index {                                     // if character is a number  
-      $devider:if($decimal ,$devider + 1, $devider); // increment devider if we have a decimal flag
-      $number: $number * 10 + $index - 1;            // add number part ($index - 1 is the new part)
-    }
-    @else if(not index(' ' '-' '+' '.', $char)){     // if character is not a number, ' ',-, + or .
-      $unit:$unit + $char;                           // add character to unit
-    } 
-  }
-  // Format value  
-  $number:if(str-index($input, '-'), $number * -1, $number);// negative value
-  $number:$number / pow(10, $devider);                      // add decimals   
-  
-  @return convert(if($unit == '', num, $unit), $number);
-}           
  
 
-// Math pow - why is this not native???
-@function pow($number, $exponent){
-  $result: 1;
-  $number: if($exponent < 0, 1/$number, $number);
-  @for $i from 0 to $exponent{ $result: $result * $number; } 
-  @return $result;
-}
-
-
-
-      
+                     
+ 
