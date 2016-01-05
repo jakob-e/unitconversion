@@ -88,4 +88,4 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 
 
 Cive it a try on:
-[Sassmeister.com](http://sassmeister.com/gist/1171db8104c2abcee1a5 ) or [CodePen.io](http://codepen.io/jakob-e/pen/dPWOQy)
+[Sassmeister.com](http://www.sassmeister.com/gist/81feb28c986a212f401b) or [CodePen.io](http://codepen.io/jakob-e/pen/dPWOQy)
