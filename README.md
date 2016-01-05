@@ -27,7 +27,7 @@ Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this f
 `````
 **Note!**
 
-* To allow conversion between relative and absolute lengths em and rem are calculated as pixel values based on base-font-size (16px browser default). If you change the base font size of your document – remember to set the $base-font-size variable accordingly.
+* To allow conversion between relative and absolute lengths em and rem are calculated as pixel values based on base-font-size (16px browser default). If you change the base font size of your document – remember to set the <code>$base-font-size</code> variable accordingly.
 
 * To ease the job of handling compounds the em function takes multiple arguments. Each argument is treated as an em compound and used to calculate the visual size.
 Example – how to set a visual size of 18px on a class nested in an element with a font-size of 2em:
