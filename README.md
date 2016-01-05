@@ -39,20 +39,8 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 * If you use unit conversion in relation to the font shorthand syntax be aware that line-height "/" will cause division. To prevent this from happening you can either either interpolate the value or use + to add the pieces together without calculation:
 ````SCSS
       h2 { 
-          font:300 em(24px)+/3 'Lato', sans-serif;
-      }
-      //  or
-      h2 { 
           font:300 #{em(24px)}/3 'Lato', sans-serif;
       }
-````
-* At the moment LibSass does not support native conversion of the following units: dpi, dpcm, dppx, s, ms, Hz and kHz . Also note that you must run the latest version (3.1 I think) supporting angles... but chances are you'll be 95% fine.
-* $cast-string-to-unit: true; allows you to cast a string to a unit. This feature is highly experimental and in the category of Chris-Eppstein-would-never-do-that. Does not work in LibSass – use at own risk!
-````SCSS
-      .class {
-        width: px("20em") + px(4);  ==>  324px;
-      }
-    
 ````
 <table>
 <tr><th colspan="3">Conversion table</th></tr>
