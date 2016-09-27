@@ -7,7 +7,8 @@ At the moment the following units are supported (please comment if something is 
 
 ````SCSS
 px, pt, pc, in, mm, cm, em, rem, ex, ch, vw, vh, vmin, vmax, 
-deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number
+deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number,
+ratio 
 ````
 
 
