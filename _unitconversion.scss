@@ -1,6 +1,6 @@
 // ____________________________________________________________________________
 //
-//    Unit Conversion v.2.1
+//    Unit Conversion v.2.1.2
 // ____________________________________________________________________________
 //
 //   Function               Input units    
@@ -52,6 +52,8 @@
 //   int(input);            as number
 //   uint(input);           as number
 //
+//   ratio                  number to fraction 
+//        
 //   Aliases
 //   string(input);
 //   number(input);
@@ -167,10 +169,38 @@ $base-font-size: 16px !default;
     $input: num($input) * 1px/$base-font-size; 
   } 
   
+  // Bug fix – resolution units seems to be flipped   
+  @if index(dpi dpcm dppx, $unit){ 
+    $units: (dppx: 0dppx, dpcm: 0dpcm, dpi: 0dpi);
+    $input-unit: map-get($units, unit($input));
+    $input: if(1dppx < 95dpi,num($input-unit + (num($input) + $to-unit)),$input);  
+  }    
+                     
   // Convert 
   @return $to-unit + $input;
 }
- 
+
+//  Convert number to ratio (fraction) 
+//  ratio(1.7777778) =>   16/9 
+@function ratio($x, $y: null){
+    @if not $y {
+        $n: $x; $y: 1;
+        @while $y < 10 {
+            $x:  $n * 10 - ((10 - $y) * $n);
+            @if $x == round($x){ @return #{$x}/#{$y}; }  
+            @else { $y: $y + 1; }
+        }
+        $x: round($n * 1000000); $y: 1000000;
+        @while $x % 10 == 0 { $x: $x/10; $y: $y/10; } 
+        @while $x % 5 == 0 { $x: $x/5; $y: $y/5; } 
+        @while $x % 2 == 0 { $x: $x/2; $y: $y/2; } 
+        @return #{$x}/#{$y};
+    } 
+    @else if $x == round($x) and $y == round($y){ @return #{$x}/#{$y}; }
+    @warn 'X and Y must be integers'; @return false;
+}
+                     
+                     
 
                      
  
