@@ -1,11 +1,12 @@
 // ____________________________________________________________________________
 //
-//    Unit Conversion v.2.1.2
+//    Unit Conversion v.2.1.3
+//    https://github.com/jakob-e/unitconversion
 // ____________________________________________________________________________
 //
-//   Function               Input units    
-//     
-//   Absolute length      
+//   Function               Input units
+//
+//   Absolute length
 //   px(input);             px, pt, pc, in, mm, cm, em, rem, number
 //   pt(input);             px, pt, pc, in, mm, cm, em, rem, number
 //   pc(input);             px, pt, pc, in, mm, cm, em, rem, number
@@ -13,14 +14,14 @@
 //   mm(input);             px, pt, pc, in, mm, cm, em, rem, number
 //   cm(input);             px, pt, pc, in, mm, cm, em, rem, number
 //
-//   Relative length 
+//   Relative length
 //   em(input);             px, pt, pc, in, mm, cm, em, rem, number
 //   rem(input);            px, pt, pc, in, mm, cm, em, rem, number
-//   ex(input);             ex, number  
+//   ex(input);             ex, number
 //   ch(input);             ch, number
 //   vw(input);             vw, number
 //   vh(input);             vh, number
-//   vmin(input);           vmin, number  
+//   vmin(input);           vmin, number
 //   vmax(input);           vmax, number
 //
 //   Angle
@@ -41,7 +42,7 @@
 //   Frequency
 //   hz(input);             hz, khz, number
 //   khz(input);            hz, khz, number
-//  
+//
 //   String
 //   str(input);            anything not null
 //
@@ -52,8 +53,8 @@
 //   int(input);            as number
 //   uint(input);           as number
 //
-//   ratio                  number to fraction 
-//        
+//   ratio                  number to fraction
+//
 //   Aliases
 //   string(input);
 //   number(input);
@@ -61,9 +62,10 @@
 // ____________________________________________________________________________
 
 // Base font size in pixel for converting em and rem to absolute lengths.
-$base-font-size: 16px !default;	 
+$root-font-size: 16px !default;
+$base-font-size: $root-font-size !default;
 
-    
+
 // Absolute lengths
 @function px($input){ @return to-unit(px, $input); }
 @function pt($input){ @return to-unit(pt, $input); }
@@ -95,16 +97,16 @@ $base-font-size: 16px !default;
 @function em($input...){
   $em: to-unit(em, nth($input,1));
   // Adjust for compounds (visual size)
-  @if length($input) > 1 { 
-    @for $i from 2 through length($input){ 
-      $em: $em / num(em(nth($input,$i))); 
-    } 
+  @if length($input) > 1 {
+    @for $i from 2 through length($input){
+      $em: $em / num(em(nth($input,$i)));
+    }
   }
   @return $em;
 }
-@function rem($input){ @return to-unit(rem, num(em($input))); }
+@function rem($input){ @return to-unit(rem, $input); }
 
-// Inconvertible relative lengths – depends on font 
+// Inconvertible relative lengths – depends on font
 @function ex($input){ @return to-unit(ex, $input); }
 @function ch($input){ @return to-unit(ch, $input); }
 
@@ -115,15 +117,15 @@ $base-font-size: 16px !default;
 @function vmax($input){ @return to-unit(vmax, $input); }
 
 // Strings and numbers
-@function str($input){ @return #{$input};  }		
+@function str($input){ @return #{$input};  }
 @function num($input){
   @if type-of($input) != number {
     @error 'Could not convert `#{$input}` - must be `type-of number`';
-    @return null; 
+    @return null;
   }
-  @return $input/($input*0+1); 
+  @return $input/($input*0+1);
 }
-@function int($input){ 
+@function int($input){
   $num: num($input);
   @return if($num<0, ceil($num), floor($num));
 }
@@ -138,69 +140,73 @@ $base-font-size: 16px !default;
 @function to-unit($unit, $input){
   // Test against valid CSS units
   $to-unit: map-get((
-    px: 0px, pt: 0pt, pc: 0pc, in: 0in, mm: 0mm, cm: 0cm, // absolute length
-    em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
-    vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
-    deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,       // angle
-    s: 0s, ms: 0ms,                                       // time
-    hz: 0Hz, khz: 0kHz,                                   // frequency
-    dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                  // resolution
-    pct: 0%, percent: 0%, num: 0, number: 0               // percent or number  
+      px: 0px, pt: 0pt, pc: 0pc, in: 0in, mm: 0mm, cm: 0cm, // absolute length
+      em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
+      vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
+      deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,       // angle
+      s: 0s, ms: 0ms,                                       // time
+      hz: 0Hz, khz: 0kHz,                                   // frequency
+      dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                  // resolution
+      pct: 0%, percent: 0%, num: 0, number: 0               // percent or number
   ), $unit);
-  
-  // Error handling – wrong $unit 
-  // Incomparable units are caught in convertion 
+
+  // Error handling – wrong $unit
+  // Incomparable units are caught in convertion
   @if not $to-unit {
     @error 'Could not convert to `#{$unit}` – must be a valid CSS unit';
-    @return null; 
-  }  
+    @return null;
+  }
 
   // Number/incomparable conversion
   @if index(num number ex ch vw vh vmin vmax, $unit) {
     $value: num($input);
   }
-  
-  // EM/REM convertion using px as base
-  @if index(em rem, unit($input)) {
-    $input: 0px + num($input) * $base-font-size/1px; 
-  } 
-  @if index(em rem, $unit) and not unitless($input) {
-    $input: 0px + $input;                
-    $input: num($input) * 1px/$base-font-size; 
-  } 
-  
-  // Bug fix – resolution units seems to be flipped   
-  @if index(dpi dpcm dppx, $unit){ 
+
+  // EM convertion using px as base
+  @if index(em, unit($input)) {
+    $input: 0px + num($input) * $base-font-size/1px;
+  }
+  @if index(em, $unit) and not unitless($input) {
+    $input: 0px + px($input);
+    $input: num($input) * 1px/$base-font-size;
+  }
+
+  // REM convertion using px as base
+  @if index(rem, unit($input)) {
+    $input: 0px + num($input) * $root-font-size/1px;
+  }
+  @if index(rem, $unit) and not unitless($input) {
+    $input: 0px + $input;
+    $input: num($input) * 1px/$root-font-size;
+  }
+
+  // Bug fix – resolution units seems to be flipped
+  @if index(dpi dpcm dppx, $unit){
     $units: (dppx: 0dppx, dpcm: 0dpcm, dpi: 0dpi);
     $input-unit: map-get($units, unit($input));
-    $input: if(1dppx < 95dpi,num($input-unit + (num($input) + $to-unit)),$input);  
-  }    
-                     
-  // Convert 
+    $input: if(1dppx < 95dpi,num($input-unit + (num($input) + $to-unit)),$input);
+  }
+
+  // Convert
   @return $to-unit + $input;
 }
 
-//  Convert number to ratio (fraction) 
-//  ratio(1.7777778) =>   16/9 
+//  Convert number to ratio (fraction)
+//  ratio(1.7777778) =>   16/9
 @function ratio($x, $y: null){
-    @if not $y {
-        $n: $x; $y: 1;
-        @while $y < 10 {
-            $x:  $n * 10 - ((10 - $y) * $n);
-            @if $x == round($x){ @return #{$x}/#{$y}; }  
-            @else { $y: $y + 1; }
-        }
-        $x: round($n * 1000000); $y: 1000000;
-        @while $x % 10 == 0 { $x: $x/10; $y: $y/10; } 
-        @while $x % 5 == 0 { $x: $x/5; $y: $y/5; } 
-        @while $x % 2 == 0 { $x: $x/2; $y: $y/2; } 
-        @return #{$x}/#{$y};
-    } 
-    @else if $x == round($x) and $y == round($y){ @return #{$x}/#{$y}; }
-    @warn 'X and Y must be integers'; @return false;
+  @if not $y {
+    $n: $x; $y: 1;
+    @while $y < 10 {
+      $x:  $n * 10 - ((10 - $y) * $n);
+      @if $x == round($x){ @return #{$x}/#{$y}; }
+      @else { $y: $y + 1; }
+    }
+    $x: round($n * 1000000); $y: 1000000;
+    @while $x % 10 == 0 { $x: $x/10; $y: $y/10; }
+    @while $x % 5 == 0 { $x: $x/5; $y: $y/5; }
+    @while $x % 2 == 0 { $x: $x/2; $y: $y/2; }
+    @return #{$x}/#{$y};
+  }
+  @else if $x == round($x) and $y == round($y){ @return #{$x}/#{$y}; }
+  @warn 'X and Y must be integers'; @return false;
 }
-                     
-                     
-
-                     
- 
