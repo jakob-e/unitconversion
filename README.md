@@ -1,4 +1,4 @@
-_unitconversion.scss (v.2.1.2)
+_unitconversion.scss (v.2.1.3)
 ==============
 
 **Convert Anything** (almost)
@@ -28,7 +28,7 @@ Rather than going with the "good" old fromUnit-to-toUnit(fromUnit) syntax this f
 `````
 **Note!**
 
-* To allow conversion between relative and absolute lengths em and rem are calculated as pixel values based on base-font-size (16px browser default). If you change the base font size of your document – remember to set the <code>$base-font-size</code> variable accordingly.
+* To allow conversion between relative and absolute lengths em and rem are calculated as pixel values based on `$root-font-size` and `$base-font-size` (16px browser default). If you change the base font size of your document – remember to set the `$root-font-size` and `$base-font-size` variables accordingly.
 
 * To ease the job of handling compounds the em function takes multiple arguments. Each argument is treated as an em compound and used to calculate the visual size.
 Example – how to set a visual size of 18px on a class nested in an element with a font-size of 2em:
@@ -89,7 +89,7 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 
 
 Cive it a try on:
-[Sassmeister.com](http://www.sassmeister.com/gist/81feb28c986a212f401b) or [CodePen.io](http://codepen.io/jakob-e/pen/AHunv)
+[Sassmeister.com](http://www.sassmeister.com/gist/5943041498e406ff2d1d452ac2c31c9f)
 
 
 <hr>
