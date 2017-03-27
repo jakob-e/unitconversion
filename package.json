@@ -1,6 +1,6 @@
 {
   "name": "unitconversion",
-  "version": "2.1.7",
+  "version": "2.1.12",
   "description": "Simple SCSS functions for unitconversion",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,8 +15,8 @@
     "Conversion",
     "Unitconversion"
   ],
-  "author": "Jakob Eriksen <mail.eriksen@gmail.com>",
-  "license": "ISC",
+  "author": "Jakob E <mail.eriksen@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jakob-e/unitconversion/issues"
   },
