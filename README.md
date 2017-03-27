@@ -1,11 +1,7 @@
-_unitconversion.scss (v.2.1.9)
+_unitconversion.scss (v.2.1.12)
 ==============
 
 **Convert Anything** (almost)
-
-````
-npm install unitconversion
-````
 
 At the moment the following units are supported (please comment if something is wrong/missing):
 
@@ -13,6 +9,11 @@ At the moment the following units are supported (please comment if something is 
 px, pt, pc, in, mm, cm, em, rem, ex, ch, vw, vh, vmin, vmax, 
 deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number,
 ratio 
+````
+
+** NPM **
+````
+npm install unitconversion
 ````
 
 
