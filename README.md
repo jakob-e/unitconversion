@@ -11,7 +11,7 @@ deg, rad, grad, turn, dpi, dpcm, dppx, s, ms, hz, khz, number,
 ratio 
 ```
 
-** NPM **
+**NPM**
 
 ````
 npm install unitconversion
