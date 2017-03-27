@@ -3,6 +3,10 @@ _unitconversion.scss (v.2.1.3)
 
 **Convert Anything** (almost)
 
+````
+npm install unitconversion
+````
+
 At the moment the following units are supported (please comment if something is wrong/missing):
 
 ````SCSS
