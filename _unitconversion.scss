@@ -1,7 +1,7 @@
 // ____________________________________________________________________________
 //
 //    Unit Conversion v.2.1.13
-//    npm install unitconversion 
+//    npm install unitconversion
 //    https://github.com/jakob-e/unitconversion
 // ____________________________________________________________________________
 //
@@ -48,7 +48,7 @@
 //   str(input);            anything not null
 //
 //   Number, int and uint
-//   num(input);            px, pt, pc, in, mm, cm, em, rem, ex, ch,
+//   num(input);            px, pt, pc, mm, cm, in, em, rem, ex, ch,
 //                          vw, vh, vmin, vmax, deg, rad, grad, turn,
 //                          dpi, dpcm, dppx, s, ms, hz, khz, number
 //   int(input);            as number
@@ -71,27 +71,27 @@ $base-font-size: $root-font-size !default;
 @function px($input){ @return to-unit(px, $input); }
 @function pt($input){ @return to-unit(pt, $input); }
 @function pc($input){ @return to-unit(pc, $input); }
-@function in($input){ @return to-unit(in, $input); }
 @function mm($input){ @return to-unit(mm, $input); }
 @function cm($input){ @return to-unit(cm, $input); }
+@function in($input){ @return to-unit(in, $input); }
 
 // Angles
-@function deg($input){ @return to-unit(deg, $input); }
-@function rad($input){ @return to-unit(rad, $input); }
+@function   deg($input){ @return to-unit(deg, $input); }
+@function   rad($input){ @return to-unit(rad, $input); }
 @function grad($input){ @return to-unit(grad, $input); }
 @function turn($input){ @return to-unit(turn, $input); }
 
 // Resolution
-@function dpi($input){ @return to-unit(dpi, $input); }
+@function  dpi($input){ @return to-unit(dpi,  $input); }
 @function dpcm($input){ @return to-unit(dpcm, $input); }
 @function dppx($input){ @return to-unit(dppx, $input); }
 
 // Time
 @function ms($input){ @return to-unit(ms, $input); }
-@function s($input){ @return to-unit(s, $input); }
+@function  s($input){ @return to-unit( s, $input); }
 
 // Frequencies
-@function hz($input){ @return to-unit(hz, $input);}
+@function  hz($input){ @return to-unit( hz, $input); }
 @function khz($input){ @return to-unit(khz, $input); }
 
 // Relative lengths
@@ -141,14 +141,14 @@ $base-font-size: $root-font-size !default;
 @function to-unit($unit, $input){
   // Test against valid CSS units
   $to-unit: map-get((
-      px: 0px, pt: 0pt, pc: 0pc, in: 0in, mm: 0mm, cm: 0cm, // absolute length
-      em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
-      vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
-      deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,       // angle
-      s: 0s, ms: 0ms,                                       // time
-      hz: 0Hz, khz: 0kHz,                                   // frequency
-      dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                  // resolution
-      pct: 0%, percent: 0%, num: 0, number: 0               // percent or number
+    px: 0px, pt: 0pt, pc: 0pc, mm: 0mm, cm: 0cm, in: 0in// absolute length
+    em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
+    vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
+    deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,       // angle
+    s: 0s, ms: 0ms,                                       // time
+    hz: 0Hz, khz: 0kHz,                                   // frequency
+    dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                  // resolution
+    pct: 0%, percent: 0%, num: 0, number: 0               // percent or number
   ), $unit);
 
   // Error handling – wrong $unit
