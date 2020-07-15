@@ -62,11 +62,46 @@
 //
 // ____________________________________________________________________________
 
+// == Base =====================================================================
 // Base font size in pixel for converting em and rem to absolute lengths.
-$root-font-size: 16px !default;
+$root-font-size: 16px            !default;
 $base-font-size: $root-font-size !default;
 
+@function n-units($number) {
+  @return (
+    // absolute length
+    px: $number * 1px, pt: $number * 1pt, pc: $number * 1pc,
+    mm: $number * 1mm, cm: $number * 1cm, in: $number * 1in,
 
+    // relative length - font based
+    em: $number * 1em, rem: $number * 1rem,
+    ch: $number * 1ch,  ex: $number * 1ex,
+
+    // relative length - viewport based
+    vw:   $number * 1vw,     vh: $number * 1vh,
+    vmin: $number * 1vmin, vmax: $number * 1vmax,
+
+    // angle
+    deg:  $number * 1deg,   rad: $number * 1rad,
+    grad: $number * 1grad, turn: $number * 1turn,
+
+    // time
+    s: $number * 1s, ms: $number * 1ms,
+
+    // frequency
+    hz: $number * 1Hz, khz: $number * 1kHz,
+    Hz: $number * 1Hz, kHz: $number * 1kHz,
+
+    // resolution
+    dppx: $number * 1dppx, dpcm: $number * 1dpcm, dpi: $number * 1dpi,
+
+    // percent or number
+    "%": $number * 1%, pct:    $number * 1%, percent: $number * 1%,
+    num: $number * 1,  number: $number * 1
+  );
+}
+
+// == Interface ================================================================
 // Absolute lengths
 @function px($input){ @return to-unit(px, $input); }
 @function pt($input){ @return to-unit(pt, $input); }
@@ -137,19 +172,12 @@ $base-font-size: $root-font-size !default;
 @function number($input){ @return num($input);}
 
 
+// == Conversion ===============================================================
 // Conversion function
 @function to-unit($unit, $input){
   // Test against valid CSS units
-  $to-unit: map-get((
-    px: 0px, pt: 0pt, pc: 0pc, mm: 0mm, cm: 0cm, in: 0in// absolute length
-    em: 0em, rem: 0rem, ch: 0ch, ex: 0ex,                 // relative length - font based
-    vw: 0vw, vh: 0vh, vmin: 0vmin, vmax: 0vmax,           // relative length - viewport based
-    deg: 0deg, turn: 0turn, grad: 0grad, rad: 0rad,       // angle
-    s: 0s, ms: 0ms,                                       // time
-    hz: 0Hz, khz: 0kHz,                                   // frequency
-    dpi: 0dpi, dpcm: 0dpcm, dppx: 0dppx,                  // resolution
-    pct: 0%, percent: 0%, num: 0, number: 0               // percent or number
-  ), $unit);
+  $units: n-units(0);
+  $to-unit: map-get($units, $unit);
 
   // Error handling – wrong $unit
   // Incomparable units are caught in convertion
