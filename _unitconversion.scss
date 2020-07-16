@@ -56,6 +56,13 @@
 //
 //   ratio                  number to fraction
 //
+//   ETC Convert
+//   one-unit(input);       px, pt, pc, mm, cm, in, em, rem, ex, ch,
+//                          vw, vh, vmin, vmax, deg, rad, grad, turn,
+//                          dpi, dpcm, dppx, s, ms, hz, khz, number
+//   to-unit(input);        same
+//   to-unit-list(list);    same as list
+//
 //   Aliases
 //   string(input);
 //   number(input);
@@ -173,6 +180,38 @@ $base-font-size: $root-font-size !default;
 
 
 // == Conversion ===============================================================
+// get unit
+@function one-unit($input){
+  @if type-of($input) == 'number' {
+    @return ($input / num($input));
+  }
+  @if type-of($input) != 'string' {
+    @error 'Value for `unit` should be a number or string.';
+  }
+
+  $units: n-units(1);
+  $parsed-unit: false;
+
+  @each $unit in $units {
+    // str-index - find substring in a string
+    // 'px' in '10px' for example
+
+    // $unit is a pair of ['px': 1px] (item in $units)
+    // nth(['px': 1px], 1) returns 'px'
+    // nth(['px': 1px], 2) returns 1px
+
+    @if (str-index($input, nth($unit, 1))) {
+      $parsed-unit: nth($unit, 2);
+    }
+  }
+
+  @if (not $parsed-unit) {
+    @error 'Invalid unit `#{$input}` – must be a valid CSS unit';
+  }
+
+  @return $parsed-unit;
+}
+
 // Conversion function
 @function to-unit($unit, $input){
   // Test against valid CSS units
@@ -218,6 +257,16 @@ $base-font-size: $root-font-size !default;
 
   // Convert
   @return $to-unit + $input;
+}
+
+@function to-unit-list($unit, $list){
+  $new-list: ();
+
+  @each $value in $list {
+    $converted: to-unit($unit, $value);
+    $new-list: append($new-list, $converted);
+  }
+  @return $new-list;
 }
 
 //  Convert number to ratio (fraction)
