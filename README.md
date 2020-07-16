@@ -85,7 +85,7 @@ Example – how to set a visual size of 18px on a class nested in an element wit
 
 <tr><td>String        </td><td>str($input);<br>string($input);</td><td>Anything not null                       </td></tr>
 <tr><td>Number        </td><td>num(input);<br>number($input)</td>
-<td>px, pt, pc, mm, in, cm, em, rem, ex, ch,<br>vw, vh, vmin, vmax, deg, rad, grad, turn,<br>dpi, dpcm, dppx, s, ms, hz, khz, number</td></tr>
+<td>px, pt, pc, mm, in, cm, em, rem, ex, ch,<br>vw, vh, vmin, vmax, deg, rad, grad, turn,<br>dpi, dpcm, dppx, s, ms, hz, khz, number, string</td></tr>
 <tr><td>              </td><td>int($input);</td>
 <td>px, pt, pc, mm, cm, in, em, rem, ex, ch,<br>vw, vh, vmin, vmax, deg, rad, grad, turn,<br>dpi, dpcm, dppx, s, ms, hz, khz, number</td></tr>
 <tr><td>              </td><td>uint($input);</td>
