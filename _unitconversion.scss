@@ -62,6 +62,7 @@
 //                             dpi, dpcm, dppx, s, ms, hz, khz, number
 //   to-unit(unit, input);     same
 //   to-unit-list(unit, list); same as list
+//   to-unit-map(unit, map);   same as map
 //
 //   Aliases
 //   string(input);
@@ -292,6 +293,16 @@ $base-font-size: $root-font-size !default;
     $new-list: append($new-list, $converted);
   }
   @return $new-list;
+}
+
+@function to-unit-map($unit, $map) {
+  $new-map: ();
+
+  @each $key, $value in $map {
+    $converted: to-unit($unit, $value);
+    $new-map: map-merge($new-map, ($key: $converted));
+  }
+  @return $new-map;
 }
 
 //  Convert number to ratio (fraction)
