@@ -63,6 +63,9 @@
 // ____________________________________________________________________________
 
 // Base font size in pixel for converting em and rem to absolute lengths.
+@use "sass:math";
+@use "sass:list";
+
 $root-font-size: 16px !default;
 $base-font-size: $root-font-size !default;
 
@@ -100,7 +103,7 @@ $base-font-size: $root-font-size !default;
   // Adjust for compounds (visual size)
   @if length($input) > 1 {
     @for $i from 2 through length($input){
-      $em: $em / num(em(nth($input,$i)));
+      $em: math.div($em, num(em(nth($input,$i))));
     }
   }
   @return $em;
@@ -124,7 +127,7 @@ $base-font-size: $root-font-size !default;
     @error 'Could not convert `#{$input}` - must be `type-of number`';
     @return null;
   }
-  @return $input/($input*0+1);
+  @return math.div($input, $input*0+1);
 }
 @function int($input){
   $num: num($input);
@@ -165,20 +168,20 @@ $base-font-size: $root-font-size !default;
 
   // EM convertion using px as base
   @if index(em, unit($input)) {
-    $input: 0px + num($input) * $base-font-size/1px;
+    $input: 0px + math.div(num($input) * $base-font-size, 1px);
   }
   @if index(em, $unit) and not unitless($input) {
     $input: 0px + px($input);
-    $input: num($input) * 1px/$base-font-size;
+    $input: math.div(num($input) * 1px, $base-font-size);
   }
 
   // REM convertion using px as base
   @if index(rem, unit($input)) {
-    $input: 0px + num($input) * $root-font-size/1px;
+    $input: 0px + math.div(num($input) * $root-font-size, 1px);
   }
   @if index(rem, $unit) and not unitless($input) {
     $input: 0px + $input;
-    $input: num($input) * 1px/$root-font-size;
+    $input: math.div(num($input) * 1px, $root-font-size);
   }
 
   // Bug fix – resolution units seems to be flipped
@@ -199,15 +202,15 @@ $base-font-size: $root-font-size !default;
     $n: $x; $y: 1;
     @while $y < 10 {
       $x:  $n * 10 - ((10 - $y) * $n);
-      @if $x == round($x){ @return #{$x}/#{$y}; }
+      @if $x == round($x){ @return list.slash($x, $y); }
       @else { $y: $y + 1; }
     }
     $x: round($n * 1000000); $y: 1000000;
-    @while $x % 10 == 0 { $x: $x/10; $y: $y/10; }
-    @while $x % 5 == 0 { $x: $x/5; $y: $y/5; }
-    @while $x % 2 == 0 { $x: $x/2; $y: $y/2; }
-    @return #{$x}/#{$y};
+    @while $x % 10 == 0 { $x: $x*0.1; $y: $y*0.1; }
+    @while $x % 5 == 0 { $x: $x*0.2; $y: $y*0.2; }
+    @while $x % 2 == 0 { $x: $x*0.5; $y: $y*0.5; }
+    @return list.slash($x, $y);
   }
-  @else if $x == round($x) and $y == round($y){ @return #{$x}/#{$y}; }
+  @else if $x == round($x) and $y == round($y){ @return list.slash($x, $y); }
   @warn 'X and Y must be integers'; @return false;
 }
