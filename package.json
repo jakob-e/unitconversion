@@ -1,6 +1,6 @@
 {
   "name": "unitconversion",
-  "version": "2.2.13",
+  "version": "2.2.0",
   "description": "Simple SCSS functions for unitconversion",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
